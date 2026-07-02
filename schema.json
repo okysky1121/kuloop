@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "groups": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/cleanString"
+          },
+          {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/cleanString"
+                },
+                {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "$ref": "#/$defs/cleanString"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "repetitions": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/allowedInteger"
+          },
+          {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "$ref": "#/$defs/allowedInteger"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "groups",
+    "repetitions"
+  ],
+  "$defs": {
+    "cleanString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "allowedInteger": {
+      "type": "integer",
+      "anyOf": [
+        {
+          "minimum": 0
+        },
+        {
+          "const": -1
+        }
+      ]
+    }
+  }
+}
